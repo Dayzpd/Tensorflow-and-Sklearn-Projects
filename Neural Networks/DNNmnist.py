@@ -25,10 +25,10 @@ def model(data, num_nodes_l1, num_nodes_l2, num_nodes_l3, num_classes):
 	
 def train(mnist, x, y, num_nodes_l1, num_nodes_l2, num_nodes_l3, num_classes, batch_size):
 	prediction = model(x, num_nodes_l1, num_nodes_l2, num_nodes_l3, num_classes)
-	loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=prediction))
+	loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y, logits=prediction))
 	optimize = tf.train.AdamOptimizer().minimize(loss)
 	
-	epochs = 10
+	epochs = 20
 	
 	with tf.Session() as session:
 		session.run(tf.global_variables_initializer())
@@ -50,9 +50,9 @@ def train(mnist, x, y, num_nodes_l1, num_nodes_l2, num_nodes_l3, num_classes, ba
 def run():
 	mnist = input_data.read_data_sets('/tmp/data', one_hot=True)
 
-	num_nodes_l1 = 500
-	num_nodes_l2 = 500
-	num_nodes_l3 = 500
+	num_nodes_l1 = 1000
+	num_nodes_l2 = 1000
+	num_nodes_l3 = 1000
 
 	num_classes = 10 # Numbers 0-9
 	batch_size = 100 
